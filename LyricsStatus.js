@@ -9,6 +9,9 @@
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
+
+const webhookURL = "https://discord.com/api/webhooks/1316292709236867122/aixaA2_np1zAjp5WGtabkDHLqF26Y0pW85wIEgI7DfwPTwDeJbuNzvVkciArZAD2pbV0"; // Replace this with your Discord webhook URL
+
 $(
   `<div id="menu-UI" class="hid-anim">
     <div id="menu-tabs">
