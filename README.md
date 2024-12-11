@@ -1,4 +1,4 @@
-### NOTE: Spotify made lyrics available only for Premium users, this script won't work if you don't have Premium!
+
 
 # Lyrics Status
 ### What does it do?
