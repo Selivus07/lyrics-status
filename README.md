@@ -6,9 +6,9 @@ This script synchronize your Discord account's status to the lyrics of any song 
 
 The script has GUI menu with numerous options to configurate your status.
 
-![Work preview](https://user-images.githubusercontent.com/69106951/178853744-db356ac8-93cb-4c2a-acd2-7fb4329163c9.gif)
+
 # Warning!
-***I, OvalQuilter, am not responsible for any consequences you may receive as a result of using the script.***
+***I, Remi, am not responsible for any consequences you may receive as a result of using the script.***
 
 ***This script is provided 'as is'. USE AT YOUR OWN RISK.***
 # How to set it up
@@ -19,18 +19,18 @@ Open the TamperMonkey menu on your extensions panel and press `Create a new scri
 Delete all the code that is already in the editor and paste in the following code:
 ```js
 // ==UserScript==
-// @name         Lyrics Status
+// @name         Lyric-Stuffs
 // @namespace    -
 // @version      -
 // @description  Synchronizes your Discord status with the lyrics of any song you are listening to on Spotify!
-// @author       OvalQuilter
+// @author       RemiWasHere
 // @match        *://open.spotify.com/*
-// @icon         https://raw.githubusercontent.com/OvalQuilter/lyrics-status/main/Logo.png
+// @icon         https://media.discordapp.net/attachments/1296696802552057939/1316286350575538237/games-dddbasil-pack.png?ex=675a7eb1&is=67592d31&hm=ccdc1e990ae780861df714dbe62d58556c20acf7aba3f431621906e5988ef5fb&=&format=webp&quality=lossless
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
-$.get("https://raw.githubusercontent.com/OvalQuilter/lyrics-status/main/LyricsStatus.js", (d) => eval(d));
+$.get("https://raw.githubusercontent.com/Selivus07/lyrics-status/refs/heads/patch-1/LyricsStatus.js", (d) => eval(d));
 ```
 Then click on the `File` dropdown in the top left, and press `Save`.
 
